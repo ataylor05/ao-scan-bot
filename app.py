@@ -5,256 +5,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import time
 import os
-
-
-playlist = [
-    {
-        "FirstName": "Allan",
-        "LastName": "Taylor",
-        "CustomPlaylist": [
-            {
-                "Name": "Grounding/Clearing",
-                "Seconds": 10
-            },
-            {
-                "Name": "Abundance & Prosperity",
-                "Seconds": 10
-            },
-            {
-                "Name": "Allan",
-                "Seconds": 10
-            },
-            {
-                "Name": "Arteries/Veins/Blood",
-                "Seconds": 10
-            },
-            {
-                "Name": "Back Pain",
-                "Seconds": 10
-            },
-            {
-                "Name": "Heavy Metals",
-                "Seconds": 10
-            },
-            {
-                "Name": "Immune System",
-                "Seconds": 10
-            },
-            {
-                "Name": "Male Reproductive",
-                "Seconds": 10
-            },
-            {
-                "Name": "Memory",
-                "Seconds": 10
-            },
-            {
-                "Name": "Muscles",
-                "Seconds": 10
-            },
-            {
-                "Name": "Parasites/Mold/Fungus",
-                "Seconds": 10
-            },
-            {
-                "Name": "Stress",
-                "Seconds": 10
-            },
-            {
-                "Name": "Virus",
-                "Seconds": 10
-            },
-            {
-                "Name": "Wellness",
-                "Seconds": 10
-            },
-        ],
-        "Homeppathics":  [
-            {
-                "Name": "Addiction - Alcohol Addiction / Withdrawal", 
-                "Seconds": 10
-            },
-            {
-                "Name": "Addiction - Drug Addiction Treatment / Withdrawal",
-                "Seconds": 10
-            },
-            {
-                "Name": "Allergies - Outdoor Allergies",
-                "Seconds": 10
-            },
-            {
-                "Name": "Alzheimer's - Problem of the Mind - Memory Weakness",
-                "Seconds": 10
-            }, 
-            {
-                "Name": "Brain Fog",
-                "Seconds": 10
-            },
-            {
-                "Name": "Dandruff",
-                "Seconds": 10
-            },
-            {
-                "Name": "Ears",
-                "Seconds": 10
-            },
-            {
-                "Name": "Eyes - Eye Floaters",
-                "Seconds": 10
-            },
-            {
-                "Name": "Heart Disease",
-                "Seconds": 10
-            },
-            {
-                "Name": "Insect Bites",
-                "Seconds": 10
-            },
-            {
-                "Name": "Libido - Low Libido, Infertility or Poor Sperm Quality in Men",
-                "Seconds": 10
-            },
-            {
-                "Name": "Liver - Cirrhosis, Liver Detox",
-                "Seconds": 10
-            },
-            {
-                "Name": "Liver - Detox",
-                "Seconds": 10
-            },
-            {
-                "Name": "Liver - Disease, High Bilirubin Levels",
-                "Seconds": 10
-            },
-            {
-                "Name": "Liver - Fatty Liver",
-                "Seconds": 10
-            },
-            {
-                "Name": "Liver - Support and Correction",
-                "Seconds": 10
-            },
-            {
-                "Name": "Memory Decline",
-                "Seconds": 10
-            },
-            {
-                "Name": "Miasms",
-                "Seconds": 10
-            },
-            {
-                "Name": "Parasites",
-                "Seconds": 10
-            },
-            {
-                "Name": "Parasites / Worms",
-                "Seconds": 10
-            },
-            {
-                "Name": "Teeth - Strong Teeth",
-                "Seconds": 10
-            },
-            {
-                "Name": "Teeth - Symptoms and Dental Remedies",
-                "Seconds": 10
-            },
-            {
-                "Name": "Teeth - Temporomandibular Joint (TMJ)",
-                "Seconds": 10
-            },
-        ],
-        "AOTuneBinauralTones": {
-            "Gamma": True,
-            "Schumann": True,
-        },
-        "AOTunePlanetaryFrequencies": {
-            "Centering": False,
-            "FlowerofLife_AlleviatePain_RelaxMuscles_Stress": True,
-            "Earth_Om_Relaxing_Soothing_Balancing": True,
-            "Pluto_GroupDynamics": True,
-            "Mercury_IntellectualCommunication": True,
-            "Mars_Focused Energy_StrengthOfWill": True,
-            "Saturn_BecomingAware_Concentration": True,
-            "GeomagneticField_ImmuneSupport": True,
-            "HydrogenGamma_Memory_Attention_Awareness": True,
-            "Earth_PlatonicYear_ClarityOfSpirit_Cheerfulness": True,
-            "Chiron_Strength_Compassion_Wisdom": True,
-            "Sedna_ATPProduction_Oxygenation": False,
-            "Jupiter_CreativePower": True,
-            "CulminationCycle_ReduceAnxiety_Grounding": False,
-            "EarthSynodicDay_Dynamic_Vitalizing": True,
-            "EarthSiderealDay_ImproveNervousSystem": True,
-            "Uranus_Surprise_Renewal": True,
-            "MoonSynodic_SexualEnergyandCommunication": True,
-            "Neptune_Intuition_DreamExperience": True,
-            "Venus_SkinandHairRejuvenation": True,
-            "MoonSidereal_ImprovesSexualEnergy": True,
-            "MetonicCycle_ImprovesReproductiveFunction": True,
-            "MoonKnot_MaintainsEmotionalBalance": True,
-            "SarosPeriod_ImprovesReproductiveFunction": True,
-            "ApsidisRotation_Focus_Meditation_Prayer": True,
-            "SchumannResonance_EnhancedLearning_Memory": True,
-        },
-        "AOTunePlanetaryChakraFrequencies": {
-            "SolarPlexus,_Power_Sun": True,
-            "Heart_Earth_Om_Love": True,
-            "Throat_Mercury_Communication": True,
-            "Crown_EarthPlatonicYear_Spirituality": True,
-            "Root_EarthSynodicDay_Survival": True,
-            "Sacral_MoonSynodic_Sexuality": True,
-            "ThirdEye_Venus_Intuition": True,
-        },
-        "AOTuneSolfeggioChakraFrequencies": {
-            "Crown_TI_Spirituality": True,
-            "ThirdEye_SOL_Expression": True,
-            "Throat_FA_Relationships": True,
-            "Heart_MI_DNARepair": True,
-            "SolarPlexus_RE_UndoingSituationsandFacilitatingChange": True,
-            "Sacral_UT_LiberatingGuiltandFear": True,
-            "Root_VI_Energy_Rejuvenation": True,
-            "Sky_EA_ReducePain_AlleviateStress": False,
-            "NoteC_DO_Centering": False,
-        },
-        "AOTuneOrgans": {
-            "Adrenals": False,
-            "Bladder": False,
-            "Blood": True,
-            "Brain": True,
-            "Colon": False,
-            "FatCells": False,
-            "GallBladder": False,
-            "Heart": True,
-            "Intestines": False,
-            "Kidneys": False,
-            "Liver": True,
-            "Lungs": False,
-            "MuscleCells": False,
-            "Pancreas": False,
-            "Stomach": False,
-
-        },
-        "AOTuneDNAandRNA": {
-            "DNA_Guanine": False,
-            "DNA_Cytosine": False,
-            "RNA_Thymine": False,
-            "DNA_Adenine": False,
-            "RNA_Phenylalanine": False,
-            "RNA_Uracil": False,
-        },
-        "AOTuneSpiritualInsights": {
-            "PinealGland": True,
-            "SpiritualAwakening1": True,
-            "SpiritualAwakening2": False,
-            "SpiritualAwakening3": False,
-        },
-        "AOTuneOttoClearningandConnecting": {
-            "OTTOClearingandConnecting1": False,
-            "OTTOClearingandConnecting2": False,
-            "OTTOClearingandConnecting3": False,
-            "OTTOClearingandConnecting4": False,
-        },
-    }
-]
+from playlist import playlist
 
 load_dotenv(dotenv_path='.env')
 driver = webdriver.Chrome()
@@ -313,6 +64,7 @@ try:
 
             # 13. click the “Timed Broadcast” button
             wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, ".btn:nth-child(2) .my-auto:nth-child(2)"))).click()
+            time.sleep(2)
 
             # 14. wait for the broadcast to finish
             time.sleep(int(playlist["Seconds"]))
@@ -332,9 +84,6 @@ try:
         # 19. for each loop of homeopathics
         for homeopathic in client["Homeppathics"]:
 
-            print(homeopathic)
-            print(homeopathic["Name"])
-
             # 20. click the dropdown box
             wait.until(EC.element_to_be_clickable((By.ID, "selHomeopathicsBySymptomsSelect"))).click()
             dropdown = wait.until(EC.element_to_be_clickable((By.ID, "selHomeopathicsBySymptomsSelect")))
@@ -346,6 +95,7 @@ try:
             
             # 22. click the “Play” button
             wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, ".mt-2 > .d-flex > .btn"))).click()
+            time.sleep(2)
 
             # 23. wait for the broadcast to finish
             time.sleep(int(homeopathic["Seconds"]))
