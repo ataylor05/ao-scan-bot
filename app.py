@@ -6,8 +6,9 @@ from selenium.webdriver.support import expected_conditions as EC
 import time
 import os
 from playlist import playlist
+import random
 
-
+shuffle_playlists = True
 
 load_dotenv(dotenv_path='.env')
 driver = webdriver.Chrome()
@@ -34,6 +35,9 @@ try:
     driver.find_element(By.NAME, "password").send_keys(os.getenv("AO_PASSWORD"))
     driver.find_element(By.CSS_SELECTOR, "button[type='submit']").click()
     check_overlay()
+
+    if shuffle_playlists == True:
+        random.shuffle(playlist)
 
     for client in playlist:
         
@@ -102,14 +106,17 @@ try:
             wait.until(EC.element_to_be_clickable((By.ID, "selHomeopathicsBySymptomsSelect"))).click()
             dropdown = wait.until(EC.element_to_be_clickable((By.ID, "selHomeopathicsBySymptomsSelect")))
             check_overlay()
+            time.sleep(1)
 
             # 21. select the homeopathic
             dropdown.find_element(By.XPATH, '//option[. = "{homeopathic}"]'.format(homeopathic=homeopathic["Name"])).click()
             check_overlay()
+            time.sleep(1)
             
             # 22. click the “Play” button
             wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, ".mt-2 > .d-flex > .btn"))).click()
             check_overlay()
+            time.sleep(1)
 
             # 23. wait for the broadcast to finish
             time.sleep(int(homeopathic["Seconds"]))
